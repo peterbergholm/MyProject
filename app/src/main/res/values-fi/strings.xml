@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Minun projektini</string>
+    <string name="title_project_detail">Projektin tiedot</string>
+    <string name="title_activity_login">Projektipäiväkirja</string>
+    <string name="user_created">Uusi käyttäjä luotu</string>
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Sähköposti</string>
+    <string name="prompt_password">Salasana</string>
+    <string name="action_sign_in">Kirjaudu/Rekisteröidy</string>
+    <string name="action_sign_in_short">Kirjaudu</string>
+    <string name="error_invalid_email">S-posti on virheellinen</string>
+    <string name="error_invalid_password">Salasana liian lyhyt</string>
+    <string name="error_incorrect_password">Salasana virheellinen</string>
+    <string name="error_field_required">Kenttä pakollinen</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_new_project">Uusi projekti</string>
+    <string name="title_activity_main">Projektien hallinta</string>
+
+    <string name="ok">OK</string>
+    <string name="add">Lisää</string>
+    <string name="add_project">Lisää projekti</string>
+    <string name="view_projects">Näytä projektit</string>
+    <string name="instructions">Ohjeet</string>
+
+    <string name="updatingReport">Uusi käyttäjä lisätty</string>
+    <string name="confirm_registry">Uusi käyttäjä. Luodaanko tili annetuilla tiedoilla?</string>
+    <string name="yes">Kyllä</string>
+
+    <string name="no">Ei</string>
+
+    <string name="project_description">Projektin tiedot</string>
+    <string name="save">Tallenna</string>
+    <string name="project_owner">Projektin omistaja</string>
+    <string name="project_name">Projektin nimi</string>
+
+    <string name="addcomment">Lisää kommentti</string>
+    <string name="addpic">Lisää kuva</string>
+    <string name="help">Ohjeet</string>
+    <string name="pic_error">Kuvan tallentaminen epäonnistui</string>
+    <string name="pic_taken">Kuva tallennettu</string>
+
+    <string name="instructionsFile">file\:\/\/\/android_asset/instructions_fi\.html</string>
+    <string name="detailinstructionsFile">file\:\/\/\/android_asset/project_detail_instructions_fi\.html</string>
+
+
+</resources>

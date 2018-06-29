@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/addcomment"
+        android:title="@string/addcomment" />
+    <item android:id="@+id/addpic"
+        android:title="@string/addpic" />
+    <item android:id="@+id/instructions"
+        android:title="@string/help" />
+</menu>
