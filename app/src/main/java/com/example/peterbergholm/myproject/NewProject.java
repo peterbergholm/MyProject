@@ -54,9 +54,8 @@ public class NewProject extends AppCompatActivity {
                 if( userId != 0 && projectName != null) {
                     newProject = new Project(projectId, userId, projectName, projectOwner, projectDescription);
                     dbHelper.saveProject(newProject);
-                    showToast("NewprojectId:" + newProject.projectId+ "-->UserId: "+ userId + "--> ProjectName" + newProject.projectName +"->Owner"+newProject.projectOwner);
-                    if(dbHelper != null)
-                        dbHelper.close();
+//                    showToast("NewprojectId:" + newProject.projectId+ "-->UserId: "+ userId + "--> ProjectName" + newProject.projectName +"->Owner"+newProject.projectOwner);
+                    dbHelper.close();
 
                     // SIIRRYTÄÄN PROJEKTILISTAUKSEEN
                     Intent newProjectList = new Intent( NewProject.this, ProjectListActivity.class);
@@ -66,19 +65,7 @@ public class NewProject extends AppCompatActivity {
 
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
     }
 
 

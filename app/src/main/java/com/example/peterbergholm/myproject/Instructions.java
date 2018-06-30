@@ -23,11 +23,11 @@ public class Instructions extends AppCompatActivity {
         else
             helpWebView.loadUrl(getString(R.string.instructionsFile));
 
-        // LUO BUTTON
+        // Create button
         Button btClose;
-        // HAE VIITTAUS XML TIEDOSTON BUTTONIIN R:n KAUTTA
+        // Get reference to the button
         btClose= (Button) findViewById(R.id.button3);
-        // ASETETAAN TAPAHTUMAKUUNTELIKA NÄPPÄIMEEN
+        // Attach the listener
         btClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

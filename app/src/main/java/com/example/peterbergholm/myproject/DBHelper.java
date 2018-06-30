@@ -3,7 +3,8 @@ package com.example.peterbergholm.myproject;
 import android.content.ContentValues;
         import android.content.Context;
         import android.database.Cursor;
-        import android.database.sqlite.SQLiteDatabase;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
@@ -26,16 +27,21 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String query = null;
-                query = "create table logins (userId Integer primary key autoincrement, " +
-                        " username text, password text)";
-                sqLiteDatabase.execSQL(query);
-                query = "create table projects (projectId Integer primary key autoincrement, userId Integer, " +
-                        " projectname text, projectowner text, projectDescription text)";
-                sqLiteDatabase.execSQL(query);
+        try {
+            query = "create table logins (userId Integer primary key autoincrement, " +
+                    " username text, password text)";
+            sqLiteDatabase.execSQL(query);
+            query = "create table projects (projectId Integer primary key autoincrement, userId Integer, " +
+                    " projectname text, projectowner text, projectDescription text)";
+            sqLiteDatabase.execSQL(query);
 
-                query = "create table projectdiary(diaryId Integer primary key autoincrement, projectId Integer, " +
-                        " diaryDate CHAR DEFAULT(datetime('now','localtime')) , diaryComment text, diaryUri text)";
-                sqLiteDatabase.execSQL(query);
+            query = "create table projectdiary(diaryId Integer primary key autoincrement, projectId Integer, " +
+                    " diaryDate CHAR DEFAULT(datetime('now','localtime')) , diaryComment text, diaryUri text)";
+            sqLiteDatabase.execSQL(query);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -61,7 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // super.onDowngrade(db, oldVersion, newVersion);
+        super.onDowngrade(db, oldVersion, newVersion);
         System.out.println("DOWNGRADE DB oldVersion="+oldVersion+" - newVersion="+newVersion);
     }
 
@@ -82,8 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("username", queryValues.username);
         values.put("password", queryValues.password);
         queryValues.userId=database.insert("logins", null, values);
-        if(database != null)
-            database.close();
+        database.close();
         return database.update("logins", values, "userId = ?", new String[] {String.valueOf(queryValues.userId)});
     }
 
@@ -98,12 +103,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 myUser.password=cursor.getString(1);
             } while (cursor.moveToNext());
         }
-        if(database != null)
-            database.close();
+        database.close();
         return myUser;
     }
 
-    public Project saveProject (Project queryValues){
+    public void saveProject (Project queryValues){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("projectName", queryValues.projectName);
@@ -113,7 +117,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         queryValues.setProjectId(database.insert("projects", null, values));
         database.close();
-        return queryValues;
     }
 
     public Project getProject (String projectId){
@@ -127,24 +130,21 @@ public class DBHelper extends SQLiteOpenHelper {
                     myProject= new Project(cursor.getLong(0), cursor.getLong(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
             } while (cursor.moveToNext());
         }
-        if(database != null)
-            database.close();
+        cursor.close();
+        database.close();
         return myProject;
     }
 
     public void getProjects (Long userId, List projectList, Map projectMap){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "Select projectId, projectName, projectOwner, projectDescription from projects where userId = "+userId;
-//        Project myProject = null;
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
             do {
-//                myProject = new Project(userId, cursor.getString(0), cursor.getString(1));
                 Long projectId = cursor.getLong(0);
                 Project myProject = new Project(projectId, userId, cursor.getString(1), cursor.getString(2), cursor.getString(3));
                 projectList.add(myProject);
                 projectMap.put(projectId,myProject);
-//                projectMap.put(myProject.projectId, myProject);
             } while (cursor.moveToNext());
             cursor.close();
         }
@@ -159,7 +159,6 @@ public class DBHelper extends SQLiteOpenHelper {
            values.put("diaryUri", comment);
         else
             values.put("diaryUri", "");
-
         database.insert("projectdiary", null, values);
         database.close();
     }
@@ -180,7 +179,6 @@ public class DBHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
             cursor.close();
         }
-
         return theDiary;
     }
 

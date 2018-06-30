@@ -8,8 +8,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * An activity representing a list of Kuvat. This activity
+ * An activity representing a list of Projects. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
  * lead to a {@link ProjectDetailActivity} representing
@@ -47,20 +45,11 @@ public class ProjectListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_project_list);
 
         List<Project> ITEMS = new ArrayList<Project>();
-        Map<Long, Project> ITEM_MAP = new HashMap<Long, Project>();
+        Map<Long, Project> ITEM_MAP = new HashMap<>();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -76,8 +65,7 @@ public class ProjectListActivity extends AppCompatActivity {
         DBHelper dbHelper = null;
         dbHelper = new DBHelper(this);
         dbHelper.getProjects(userId, ITEMS, ITEM_MAP);
-        if(dbHelper!=null)
-            dbHelper.close();
+        dbHelper.close();
 
         projectList = new ProjectList(ITEMS, ITEM_MAP);
 
