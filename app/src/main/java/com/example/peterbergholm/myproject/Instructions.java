@@ -18,10 +18,19 @@ public class Instructions extends AppCompatActivity {
 
         WebView helpWebView;
         helpWebView = (WebView) findViewById(R.id.WebView01);
-        if(caller!=null)
-            helpWebView.loadUrl(getString(R.string.detailinstructionsFile));
-        else
-            helpWebView.loadUrl(getString(R.string.instructionsFile));
+        switch (caller){
+            case "detail":
+                helpWebView.loadUrl(getString(R.string.detailinstructionsFile));
+                break;
+            case "main":
+                helpWebView.loadUrl(getString(R.string.instructionsFile));
+                break;
+            case "project":
+                helpWebView.loadUrl(getString(R.string.projectlistFile));
+                break;
+            default:
+                helpWebView.loadUrl(getString(R.string.instructionsFile));
+        }
 
         // Create button
         Button btClose;

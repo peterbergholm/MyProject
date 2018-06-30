@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.instructions:
                 // SIIRRYTÄÄN INTSRUCTIONS NÄYTTÖÖN
                 Intent instructions = new Intent(MainActivity.this, Instructions.class);
+                instructions.putExtra("caller", "main");
                 startActivity(instructions);
                 return true;
 

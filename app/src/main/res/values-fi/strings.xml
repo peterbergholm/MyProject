@@ -45,6 +45,7 @@
 
     <string name="instructionsFile">file\:\/\/\/android_asset/instructions_fi\.html</string>
     <string name="detailinstructionsFile">file\:\/\/\/android_asset/project_detail_instructions_fi\.html</string>
+    <string name="projectlistFile">file\:\/\/\/android_asset/project_list_instructions_fi\.html</string>
 
 
 </resources>

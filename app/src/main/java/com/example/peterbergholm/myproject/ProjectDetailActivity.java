@@ -83,7 +83,6 @@ public class ProjectDetailActivity extends AppCompatActivity {
                 instructions.putExtra("caller", "detail");
                 startActivity(instructions);
                 return true;
-
             case android.R.id.home:
                 navigateUpTo(new Intent(this, ProjectListActivity.class));
                 return true;
